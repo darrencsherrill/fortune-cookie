@@ -17,19 +17,41 @@
 import webapp2
 import random
 
+def getRandomFortune():
+    fortunes = [
+    "I see much coding in your furture.",
+    "Consider eatting more fortune cookies.",
+    "You have tamed the mighty Python, now you must free it onto the Great Spider's Web"
+    ]
+
+    index = random.randint(0, 2)
+
+    return fortunes[index]
+
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
         header = "<h1>Fortune Cookies</h1>"
-        fortunes =["you win get freat fortune","do not seek out what will come to you","you always pass the dutchy to the left hand side","1 milloin dollars is in you future","you will live to 100"]
-        my_fortune = self.random.choice(fortunes)
-        lucky_number = random.randint(1, 999)
-        fortune_sentence = "Fortune: " + my_fortune
-        number_sentence = "Your lucky number is: " + str(lucky_number)
+
+        fortune = "<strong>" + getRandomFortune() + "</strong>"
+        fortune_sentence = "Your fortune: " + fortune
+        fortune_paragraph = "<p>" + fortune_sentence + "</p>"
+
+        lucky_number = "<strong>" + str(random.randint(1, 999)) + "</strong>"
+        number_sentence = "Your lucky number is: " + lucky_number
         number_paragrah = "<p>" + number_sentence + "</p>"
-        self.response.write(header + number_paragrah + number_sentence)
-        fortune = []
-        fortune += ["]
+
+        cookie_agian_button = "<a href = '.'> <button>Another cookie plz!</button></a>"
+
+        content = header + fortune_paragraph + number_paragrah + cookie_agian_button
+
+        self.response.write(content)
+
+
+
+
+
+
 
 
 app = webapp2.WSGIApplication([
